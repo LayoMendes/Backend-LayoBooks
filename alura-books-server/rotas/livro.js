@@ -1,17 +1,13 @@
 const { Router } = require('express');
-const {getLivro, getLivros} = require('../controladores/livro');
+const {getLivro, getLivros, postLivro} = require('../controladores/livro');
 
 const router = Router()
 
-router.get('/', getLivro); 
+router.get('/', getLivros);
 
-router.get('/:id', getLivro); 
+router.get('/:id', getLivro);
 
-
-
-router.post('/', (req, res) => {
-  res.send('Adicionar um novo livro');
-});
+router.post('/', postLivro);
 
 router.patch('/', (req, res) => {
   res.send('Atualizar um livro');
