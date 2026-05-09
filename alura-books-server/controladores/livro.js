@@ -1,4 +1,4 @@
-const { getTodosLivros, getLivroPorId, insereLivro } = require('../../servicos/livro');
+const { getTodosLivros, getLivroPorId, insereLivro, modificarLivro } = require('../../servicos/livro');
 
 function getLivros(req, res) {
   try {
@@ -20,8 +20,17 @@ function getLivro(req, res) {
     res.status(500).send('Erro ao buscar livros');
   }
 }
+function patchLivro(req, res) {
+  try {
+    const id = req.params.id;
+    const body = req.body;
 
-
+    modificarLivro(id, body);
+    res.send('Livro atualizado com sucesso');
+  } catch (error) {
+    res.status(500).send('Erro ao atualizar livro');
+  }
+}
 
 function postLivro(req, res) {
   try {
@@ -33,9 +42,21 @@ function postLivro(req, res) {
   }
 }
 
+function deleteLivro(req, res) {
+  try {
+    const id = req.params.id;
+    deletaLivroPorId(id);
+    res.send('Livro deletado com sucesso');
+  } catch (error) {
+    res.status(500).send('Erro ao deletar livro');
+  }
+
+}
 module.exports = {
   getLivros,
   getLivro,
-  postLivro
+  postLivro,
+  patchLivro,
+  deleteLivro
 };
 
